@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+/* This Block Configures Tailwind Version Four Theme Features */
+@theme {
+  /* This Defines The Custom Primary Color Palette */
+  --color-primary-50: #f0f9ff;
+  --color-primary-100: #e0f2fe;
+  --color-primary-200: #bae6fd;
+  --color-primary-300: #7dd3fc;
+  --color-primary-400: #38bdf8;
+  --color-primary-500: #0ea5e9;
+  --color-primary-600: #0284c7;
+  --color-primary-700: #0369a1;
+  --color-primary-800: #075985;
+  --color-primary-900: #0c4a6e;
+  --color-primary-950: #082f49;
+}
+
+/* This Enables Manual Dark Mode Support For Class Based Toggling */
+@variant dark (&:where(.dark, .dark *));
+
+/* This Is The Main Styling Foundation */
+:root {
+  /* This Is The Sans Font Variable */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* This Applies Global Base Styles */
+@layer base {
+
+  /* This Ensures The Theme Class Works On Both Html And Body */
+  html,
+  body {
+    @apply transition-colors duration-300;
+  }
+
+  body {
+    /* This Styles The Main App Background And Text Color For Both Modes */
+    @apply bg-white text-slate-900 antialiased;
+    font-family: var(--font-sans);
+  }
+
+  /* This Specifically Targets The Dark Class Mode */
+  .dark body {
+    @apply bg-slate-950 text-slate-100;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    /* This Styles All Headings For Both Light And Dark Mode */
+    @apply font-bold tracking-tight text-slate-900;
+  }
+
+  .dark h1,
+  .dark h2,
+  .dark h3,
+  .dark h4,
+  .dark h5,
+  .dark h6 {
+    @apply text-slate-50;
+  }
+}
+
+/* This Applies Component Level Styles */
+@layer components {
+
+  /* This Is The Primary Button Class Inspired By Google Drive */
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-full font-medium transition-all hover:bg-blue-700 active:scale-95;
+  }
+
+  .dark .btn-primary {
+    @apply bg-blue-500 hover:bg-blue-400;
+  }
+
+  /* This Is A Glassmorphism Style Card */
+  .glass-card {
+    @apply bg-white/70 backdrop-blur-md border border-white/20 shadow-sm rounded-2xl;
+  }
+
+  .dark .glass-card {
+    @apply bg-slate-900/70 border-white/10;
+  }
+}
+
+/* This Applies Global Utilities And Custom Animations */
+@layer utilities {
+
+  /* This Provides A Depth Effect For Three Dimensional Transforms */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  /* This Is A Subtle Floating Animation For Interface Components */
+  @keyframes bounce-subtle {
+
+    0%,
+    100% {
+      transform: translateY(-5%);
+      animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+    }
+
+    50% {
+      transform: translateY(0);
+      animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    }
+  }
+
+  .animate-bounce-subtle {
+    animation: bounce-subtle 2s infinite;
+  }
+}
